@@ -5,7 +5,7 @@ use Config;
 
 class GeoCodingService {
 
-    public function getCoordinates($query)
+    public function geocode($query)
     {
         $serviceClass = $this->getServiceClass( Config::get('geo.service') );
 
@@ -15,7 +15,7 @@ class GeoCodingService {
 
         $service = new $serviceClass();
 
-        return $service->getCoordinates( $query );
+        return $service->geocode( $query );
     }
 
     protected function getServiceClass($key)

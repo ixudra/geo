@@ -8,7 +8,7 @@ use Config;
 
 class MapQuestGeoCoder extends BaseGeoCoder implements GeoCoderInterface {
 
-    public function getCoordinates($query)
+    public function geocode($query)
     {
         if( $query == '' ) {
             return false;

@@ -6,7 +6,7 @@ use Ixudra\Geo\GeoCoderInterface;
 
 class GoogleGeoCoder extends BaseGeoCoder implements GeoCoderInterface {
 
-    public function getCoordinates($query)
+    public function geocode($query)
     {
         if( $query == '' ) {
             return false;

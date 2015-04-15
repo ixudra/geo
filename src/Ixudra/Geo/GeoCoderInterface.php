@@ -3,6 +3,6 @@
 
 interface GeoCoderInterface {
 
-    public function getCoordinates($query);
+    public function geocode($query);
 
 }
