@@ -14,6 +14,7 @@
         ),
 
 
+        // MapQuest specific configuration
         'mapQuest'                  => array(
 
             'api_key'                   => ''
