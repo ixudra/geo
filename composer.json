@@ -1,7 +1,7 @@
 {
     "name": "ixudra/geo",
     "description": "Custom PHP geocoding library for the Laravel 5 framework - developed by Ixudra",
-    "version": "5.0.1",
+    "version": "5.1.0",
     "keywords": ["Ixudra", "Laravel", "geo", "geocode"],
     "homepage": "http://ixudra.be",
     "license": "MIT",

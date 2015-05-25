@@ -3,6 +3,7 @@
 
 use Ixudra\Geo\BaseGeoCoder;
 use Ixudra\Geo\GeoCoderInterface;
+use Config;
 
 class GoogleGeoCoder extends BaseGeoCoder implements GeoCoderInterface {
 
@@ -14,10 +15,11 @@ class GoogleGeoCoder extends BaseGeoCoder implements GeoCoderInterface {
 
         $getParameters = array(
             'address'       => $query,
-            'sensor'        => false
+            'sensor'        => false,
+            'key'           => Config::get('geo.google.api_key')
         );
 
-        $response = $this->getCurlService()->get('http://maps.googleapis.com/maps/api/geocode/json', $getParameters, true);
+        $response = $this->getCurlService()->get('https://maps.googleapis.com/maps/api/geocode/json', $getParameters, true);
         if( $response->status != 'OK' ) {
             $this->returnErrorResponse( 'An error has occurred while connecting to the Google Maps API' );
         }

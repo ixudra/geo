@@ -9,7 +9,7 @@
         // Google specific configuration
         'google'                    => array(
 
-            'api_key'                   => '' // Not supported yet
+            'api_key'                   => ''
 
         ),
 

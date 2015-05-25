@@ -127,7 +127,7 @@ This will create a configuration file and publish it as `config/geo.php`. By def
         // Google specific configuration
         'google'                    => array(
 
-            'api_key'                   => '' // Not supported yet
+            'api_key'                   => ''
 
         ),
 
@@ -144,8 +144,6 @@ This will create a configuration file and publish it as `config/geo.php`. By def
 ```
 
 The `service` key can be used to select the specific geocoder that you would like to use. The default is set to `google`. At this point, only `google` and `mapQuest` are supported. Once you have selected a geocoder, you can add API configuration to its specific configuration array.
-
-Please note that at this point only the MapQuest API is supported. The Google Maps API (and others) will follow in the future.
 
 
 That's all there is to it! Have fun!
