@@ -20,7 +20,7 @@ class GoogleGeoCoder extends BaseGeoCoder implements GeoCoderInterface {
         );
 
         $response = $this->getCurlService()->get('https://maps.googleapis.com/maps/api/geocode/json', $getParameters, true);
-        if( $response->status != 'OK' ) {
+        if( $response == null || $response->status != 'OK' ) {
             $this->returnErrorResponse( 'An error has occurred while connecting to the Google Maps API' );
         }
 
