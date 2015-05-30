@@ -1,8 +1,8 @@
-<?php
-
-namespace Ixudra\Geo\Exceptions;
+<?php namespace Ixudra\Geo\Exceptions;
 
 
-class ErrorResponseException extends \Exception{
+class ErrorResponseException extends \Exception {
+
+    // ...
 
 }

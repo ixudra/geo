@@ -30,7 +30,7 @@ Add the service provider to your `config/app.php` file:
         //...
         'Ixudra\Geo\GeoServiceProvider',
 
-    )
+    ),
 
 ```
 
@@ -43,7 +43,7 @@ Add the facade to your `config/app.php` file:
         //...
         'Geo'          => 'Ixudra\Geo\Facades\Geo',
 
-    )
+    ),
 
 ```
 
@@ -67,34 +67,7 @@ Once you've installed the package, you can start using it in your code:
 
 ```
 
-If the GeoCoder instance could not find any results, it will tell you by returning an empty result:
-
-```php
-
-    $response = Geo::geocode('#####');
-
-    // Will return the following response:
-    //
-    // {
-    //     "status": "empty"
-    // }
-
-```
-
-If the GeoCoder instance encounters an error of some kind, it will return the error message:
-
-```php
-
-    $response = Geo::geocode('Mersenhovenstraat 5, 3722 Kortessem');
-
-    // Will return the following response:
-    //
-    // {
-    //     "status": "error",
-    //     "message": "Error message goes here"
-    // }
-
-```
+If the GeoCoder instance could not find any results, it wil thrown an `Ixudra\Geo\Exceptions\EmptyResponseException`. If the GeoCoder instance encounters an error of some kind, an `Ixudra\Geo\Exceptions\ErrorResponseException` will be thrown:
 
 
 
@@ -127,7 +100,7 @@ This will create a configuration file and publish it as `config/geo.php`. By def
         // Google specific configuration
         'google'                    => array(
 
-            'api_key'                   => ''
+            'api_key'                   => '',
 
         ),
 
@@ -135,7 +108,7 @@ This will create a configuration file and publish it as `config/geo.php`. By def
         // MapQuest specific configuration
         'mapQuest'                  => array(
 
-            'api_key'                   => ''
+            'api_key'                   => '',
 
         ),
 

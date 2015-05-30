@@ -3,6 +3,8 @@
 
 use Ixudra\Geo\BaseGeoCoder;
 use Ixudra\Geo\GeoCoderInterface;
+use Ixudra\Geo\Exceptions\InvalidArgumentException;
+
 use Config;
 
 class GoogleGeoCoder extends BaseGeoCoder implements GeoCoderInterface {
@@ -10,7 +12,7 @@ class GoogleGeoCoder extends BaseGeoCoder implements GeoCoderInterface {
     public function geocode($query)
     {
         if( $query == '' ) {
-            return false;
+            throw new InvalidArgumentException();
         }
 
         $getParameters = array(
@@ -25,7 +27,7 @@ class GoogleGeoCoder extends BaseGeoCoder implements GeoCoderInterface {
         }
 
         if( count($response->results) == 0 ) {
-            return $this->returnEmptyResponse();
+            $this->returnEmptyResponse();
         }
 
         $lat = $response->results[ 0 ]->geometry->location->lat;

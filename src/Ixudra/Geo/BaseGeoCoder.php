@@ -7,13 +7,6 @@ use Ixudra\Geo\Exceptions\ErrorResponseException;
 
 abstract class BaseGeoCoder {
 
-    CONST RESPONSE_EMPTY = 'not_found';
-
-    const RESPONSE_SUCCESSFUL = 'success';
-
-    const RESPONSE_UNSUCCESSFUL = 'error';
-
-
     protected $curlService;
 
 
@@ -34,7 +27,7 @@ abstract class BaseGeoCoder {
     protected function returnSuccessResponse($lat, $lng)
     {
         $result = new \stdClass();
-        $result->status = self::RESPONSE_SUCCESSFUL;
+        $result->status = 'success';
         $result->lat = $lat;
         $result->lng = $lng;
 
