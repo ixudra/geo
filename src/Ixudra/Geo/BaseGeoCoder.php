@@ -2,6 +2,8 @@
 
 
 use Ixudra\Curl\CurlService;
+use Ixudra\Geo\Exceptions\EmptyResponseException;
+use Ixudra\Geo\Exceptions\ErrorResponseException;
 
 abstract class BaseGeoCoder {
 
@@ -26,10 +28,7 @@ abstract class BaseGeoCoder {
 
     protected function returnEmptyResponse()
     {
-        $result = new \stdClass();
-        $result->status = self::RESPONSE_EMPTY;
-
-        return $result;
+        throw new EmptyResponseException();
     }
 
     protected function returnSuccessResponse($lat, $lng)
@@ -44,11 +43,7 @@ abstract class BaseGeoCoder {
 
     protected function returnErrorResponse($message)
     {
-        $result = new \stdClass();
-        $result->status = self::RESPONSE_UNSUCCESSFUL;
-        $result->message = $message;
-
-        return $result;
+        throw new ErrorResponseException($message);
     }
 
 } 
