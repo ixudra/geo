@@ -1,13 +1,11 @@
 <?php namespace Ixudra\Geo;
 
 
-use Config;
-
 class GeoCodingService {
 
     public function geocode($query)
     {
-        $serviceClass = $this->getServiceClass( Config::get('geo.service') );
+        $serviceClass = $this->getServiceClass( env('GEO_SERVICE', 'google') );
 
         if( !class_exists($serviceClass) ) {
             $serviceClass = $this->getServiceClass( 'google' );

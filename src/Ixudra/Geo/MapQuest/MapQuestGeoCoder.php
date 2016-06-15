@@ -5,8 +5,6 @@ use Ixudra\Geo\BaseGeoCoder;
 use Ixudra\Geo\GeoCoderInterface;
 use Ixudra\Geo\Exceptions\InvalidArgumentException;
 
-use Config;
-
 class MapQuestGeoCoder extends BaseGeoCoder implements GeoCoderInterface {
 
     public function geocode($query)
@@ -15,16 +13,20 @@ class MapQuestGeoCoder extends BaseGeoCoder implements GeoCoderInterface {
             throw new InvalidArgumentException();
         }
 
-        $getParameters = array(
+        $data = array(
             'q'                 => $query,
-            'api_key'           => Config::get('geo.mapQuest.api_key')
+            'api_key'           => env('GEO_MAPQUEST_API_KEY')
         );
 
         $lat = '';
         $lng = '';
 
         try {
-            $response = $this->getCurlService()->get('https://api.geocod.io/v1/geocode', $getParameters, true);
+            $response = $this->getCurlService()
+                ->to('https://api.geocod.io/v1/geocode')
+                ->withData( $data )
+                ->asJson()
+                ->get();
 
             $lat = $response->results[ 0 ]->location->lat;
             $lng = $response->results[ 0 ]->location->lng;

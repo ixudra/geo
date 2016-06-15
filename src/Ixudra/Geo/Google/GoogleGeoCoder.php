@@ -5,8 +5,6 @@ use Ixudra\Geo\BaseGeoCoder;
 use Ixudra\Geo\GeoCoderInterface;
 use Ixudra\Geo\Exceptions\InvalidArgumentException;
 
-use Config;
-
 class GoogleGeoCoder extends BaseGeoCoder implements GeoCoderInterface {
 
     public function geocode($query)
@@ -15,13 +13,18 @@ class GoogleGeoCoder extends BaseGeoCoder implements GeoCoderInterface {
             throw new InvalidArgumentException();
         }
 
-        $getParameters = array(
+        $data = array(
             'address'       => $query,
             'sensor'        => false,
-            'key'           => Config::get('geo.google.api_key')
+            'key'           => env('GEO_GOOGLE_API_KEY')
         );
 
-        $response = $this->getCurlService()->get('https://maps.googleapis.com/maps/api/geocode/json', $getParameters, true);
+        $response = $this->getCurlService()
+            ->to('https://maps.googleapis.com/maps/api/geocode/json')
+            ->withData( $data )
+            ->asJson()
+            ->get();
+
         if(  is_null($response) || $response->status != 'OK' ) {
             $this->returnErrorResponse( 'An error has occurred while connecting to the Google Maps API' );
         }

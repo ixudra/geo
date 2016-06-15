@@ -15,7 +15,7 @@ Pull this package in through Composer.
 
     {
         "require": {
-            "ixudra/geo": "5.*"
+            "ixudra/geo": "6.*"
         }
     }
 
@@ -47,6 +47,18 @@ Add the facade to your `config/app.php` file:
 
 ```
 
+Add the following environment values to your `.env` file:
+
+```
+
+GEO_SERVICE=google                      # Valid options are: google, mapquest 
+GEO_GOOGLE_API_KEY=your_api_key         # Only required when using Google for geo coding
+GEO_MAPQUEST_API_KEY=your_api_key       # Only required when using MapQuest for geo coding
+
+```
+
+By default, the package will use the Google API.
+
 
 
 ## Usage
@@ -68,55 +80,6 @@ Once you've installed the package, you can start using it in your code:
 ```
 
 If the GeoCoder instance could not find any results, it wil thrown an `Ixudra\Geo\Exceptions\EmptyResponseException`. If the GeoCoder instance encounters an error of some kind, an `Ixudra\Geo\Exceptions\ErrorResponseException` will be thrown:
-
-
-
-
-## Configuration options
-
-### Publishing the config file
-
-The package has several configuration options. In order to modify these, you will have to publish the config file using artisan:
-
-```php
-
-    // Publish all resources from all packages
-    php artisan vendor:publish
-
-    // Publish only the resources of the package
-    php artisan vendor:publish --provider="Ixudra\\Geo\\GeoServiceProvider"
-
-```
-
-This will create a configuration file and publish it as `config/geo.php`. By default, the config file will look like this:
-
-```php
-
-    return array(
-
-        'service'                   => 'google',
-
-
-        // Google specific configuration
-        'google'                    => array(
-
-            'api_key'                   => '',
-
-        ),
-
-
-        // MapQuest specific configuration
-        'mapQuest'                  => array(
-
-            'api_key'                   => '',
-
-        ),
-
-    );
-
-```
-
-The `service` key can be used to select the specific geocoder that you would like to use. The default is set to `google`. At this point, only `google` and `mapQuest` are supported. Once you have selected a geocoder, you can add API configuration to its specific configuration array.
 
 
 That's all there is to it! Have fun!
