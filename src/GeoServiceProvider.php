@@ -16,14 +16,12 @@ class GeoServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->app['Geo'] = $this->app->singleton(
-            function($app)
-            {
+        $this->app->singleton('Geo', function () {
                 return new GeoCodingService();
             }
         );
 
-        $configPath = __DIR__ . '/../../config/config.php';
+        $configPath = __DIR__ . '/config/config.php';
 
         $this->mergeConfigFrom($configPath, 'geo');
         $this->publishes(
