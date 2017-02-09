@@ -16,7 +16,7 @@ class GeoServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->app['Geo'] = $this->app->share(
+        $this->app['Geo'] = $this->app->singleton(
             function($app)
             {
                 return new GeoCodingService();
