@@ -25,10 +25,10 @@ Add the service provider to your `config/app.php` file:
 
 ```php
 
-    providers       => array(
+    'providers'         => array(
 
         //...
-        'Ixudra\Geo\GeoServiceProvider',
+        Ixudra\Geo\GeoServiceProvider::class,
 
     ),
 
@@ -38,10 +38,10 @@ Add the facade to your `config/app.php` file:
 
 ```php
 
-    facades         => array(
+    'facades'           => array(
 
         //...
-        'Geo'          => 'Ixudra\Geo\Facades\Geo',
+        'Geo'               => Ixudra\Geo\Facades\Geo::class,
 
     ),
 
