@@ -5,11 +5,13 @@ use Ixudra\Geo\BaseGeoCoder;
 use Ixudra\Geo\GeoCoderInterface;
 use Ixudra\Geo\Exceptions\InvalidArgumentException;
 
+use Exception;
+
 class MapQuestGeoCoder extends BaseGeoCoder implements GeoCoderInterface {
 
     public function geocode($query)
     {
-        if( $query == '' ) {
+        if( empty($query) ) {
             throw new InvalidArgumentException();
         }
 
@@ -30,11 +32,20 @@ class MapQuestGeoCoder extends BaseGeoCoder implements GeoCoderInterface {
 
             $lat = $response->results[ 0 ]->location->lat;
             $lng = $response->results[ 0 ]->location->lng;
-        } catch(\Exception $e) {
-            $this->returnErrorResponse( 'An error has occurred while connecting to the MapQuest API: '. $e->getMessage() );
+        } catch(Exception $e) {
+            $response = new \stdClass();
+            $response->status = 'ERROR';
+            $response->error_message = $e->getMessage();
+
+            $this->returnErrorResponse( 'Mapquest', $response  );
         }
 
-        return $this->returnSuccessResponse( $lat, $lng );
+        return $this->returnSuccessGeocodingResponse( $lat, $lng );
+    }
+
+    public function distance($from, $to)
+    {
+        throw new Exception( 'Not yet implemented' );
     }
 
 } 

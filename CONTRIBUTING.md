@@ -22,6 +22,8 @@ Before filing an issue:
 - Reread the documentation to make sure if the answer the question hasn't already been addressed there
 - Make sure the question wasn't already asked before in this project. Also check the closed issues
 - Check the pull requests tab to make sure that the bug doesn't have a fix in progress
+- Check if Google/Mapquest API settings are configured correctly
+- Check if your API key is correct
 
 
 ## Submitting pull requests

@@ -24,7 +24,7 @@ abstract class BaseGeoCoder {
         throw new EmptyResponseException();
     }
 
-    protected function returnSuccessResponse($lat, $lng)
+    protected function returnSuccessGeocodingResponse($lat, $lng)
     {
         $result = new \stdClass();
         $result->status = 'success';
@@ -34,9 +34,27 @@ abstract class BaseGeoCoder {
         return $result;
     }
 
-    protected function returnErrorResponse($message)
+    protected function returnSuccessDistanceResponse($distance, $duration)
     {
-        throw new ErrorResponseException($message);
+        $result = new \stdClass();
+        $result->status = 'success';
+        $result->distance = $distance;
+        $result->duration = $duration;
+
+        return $result;
+    }
+
+    protected function returnErrorResponse($api, $response)
+    {
+        $status = 'UNKNOWN';
+        $message = 'An unknown error has occurred';
+
+        if(  !is_null($response) ) {
+            $status = $response->status;
+            $message = $response->error_message;
+        }
+
+        throw new ErrorResponseException( 'An error has occurred while connecting to the '. $api .' API: '. $status .' - '. $message );
     }
 
 } 

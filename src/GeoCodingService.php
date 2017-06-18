@@ -5,15 +5,23 @@ class GeoCodingService {
 
     public function geocode($query)
     {
-        $serviceClass = $this->getServiceClass( env('GEO_SERVICE', 'google') );
+        return $this->getService()->geocode( $query );
+    }
+
+    public function distance($from, $to)
+    {
+        return $this->getService()->distance( $from, $to );
+    }
+
+    protected function getService()
+    {
+        $serviceClass = $this->getServiceClass(env('GEO_SERVICE', 'google'));
 
         if( !class_exists($serviceClass) ) {
-            $serviceClass = $this->getServiceClass( 'google' );
+            $serviceClass = $this->getServiceClass('google');
         }
 
-        $service = new $serviceClass();
-
-        return $service->geocode( $query );
+        return new $serviceClass();
     }
 
     protected function getServiceClass($key)
